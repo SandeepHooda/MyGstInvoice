@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sales invoice</title>
+<link rel="stylesheet" href="web/css/styles.css">
+<script src="web/js/index.js"></script>
+</head>
+<body onload="onBodyLoad()">
+
+<div class="container">
+	<!-- Login  -->
+	<div id="login" name="login">
+	<table class="loginPage" >
+		<tr>
+		 	<td> <B>User Name: </B></td> <td> <input type="text" name="userName" id="userName"/></td> 
+		 </tr>
+		 <tr>
+		 	 <td> <B>Password:</B></td> <td>  <input type="password" name="pwd" id="pwd" onkeyup="showPassword(event)"/></td> 
+		  </tr>
+		  
+		  <tr>
+		  <td> <input type="submit" value="Reset password" onclick="resetPassword()" class="bigIcon"></td>
+		  	<td > <input type="submit" value="Submit" onclick="login()" class="bigIcon"> </td> 
+		  </tr>
+		  <tr>
+		  	<td colspan="2" name="loginStatus" id="loginStatus"> <span > </td> 
+		  </tr>
+	</table>
+
+		 	 <input type="checkbox" name="showPasswordCheckBox" id="showPasswordCheckBox" onchange="showPassword(event)" >
+		 	 <label for="showPasswordCheckBox" ><B>Show Password:</B></label>
+		 	 <span name="showPasswordSpan" id="showPasswordSpan"></span>
+		
+	</div>
+
+	<!-- Sales details -->
+	<main>
+	<div id="salesForm" name="salesForm" class="salesForm">
+	
+	<!-- Hamburger  -->
+	<header>
+	
+	  <a id="menu" class="hamburger">
+	          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+	            <path d="M2 6h20v3H2zm0 5h20v3H2zm0 5h20v3H2z"/>
+	          </svg>
+	        </a>
+	</header>
+	<nav id="drawer"  class="nav" >
+  <ul class="nav__list" >
+    <li class="nav__item"><a href="#Invoice" onclick="showInvoice()">Invoice</a></li>
+    <li class="nav__item"><a href="#Reports" onclick="showReports()">Reports</a></li>
+   
+
+  </ul>
+</nav> 
+	<!-- Hamburger  -->
+	<br/>
+	
+	<a id="signOff" name="signOff" onclick="logOut()" class="logOut">Logout</a>
+	<br/><br/><br/><br/>
+	
+	<div id="reportView" name="reportView" class="fullWidth">
+	<table class="loginPage" class="fullWidth">
+	<tr>
+		<td>
+			<select id="reportMonths" name="reportMonths" >
+				  <option value="1">Jan</option>
+				  <option value="2">Feb</option>
+				  <option value="3">Mar</option>
+				  <option value="4">Apr</option>
+				  <option value="5">May</option>
+				  <option value="6">Jun</option>
+				  <option value="7">Jul</option>
+				  <option value="8">Aug</option>
+				  <option value="9">Sep</option>
+				  <option value="10">Oct</option>
+				  <option value="11">Nov</option>
+				  <option value="12">Dec</option>
+			</select> 
+		</td> 
+		<td>
+		<select id="reportYear" name="reportYear" onchange="itemSelected()">
+			  <option value="2018">2018</option>
+			  <option value="2019">2019</option>
+			 
+		</select>
+		</td>
+	<tr>
+		<td>
+			<input type="submit" value="Get Report &#x2708;" onclick="fetchReport('html')" class="bigIcon">
+		</td>
+		<td>
+			<input type="submit" value="Export to XLS &#x2708;" onclick="fetchReport('csv')" class="bigIcon">
+		
+		</td>
+	</tr>
+	</table>
+			<div id="reports" name="reports"></div>
+	</div> <!--  Sales /repors -->
+	<div id="invoiceView" name="invoiceView" >
+		<input type="checkbox" name="eCommerceCheckBox" id="eCommerceCheckBox" onchange="setEcommerce(event)" >
+		 	 <label for="eCommerceCheckBox" ><B>e-Commerce:</B></label>
+			<table class="loginPage" >
+				<tr>
+				 	<td> <B>Customer Name: </B></td> <td> <input type="text" name="customerName" id="customerName"/></td> 
+				 </tr>
+				 <tr>
+				 	 <td> <B>Shipping Address:</B></td> <td>  <textarea rows="6"  name="shippingAddress" id="shippingAddress"></textarea></td> 
+				  </tr>
+				  	<td> <B>State:</B></td> <td> <select id="shippingState" name="shippingState" onchange="saveFavouriteStateCode()"></select></td>
+				  <tr>
+				  </tr>
+				  	<td > <B>Item:</B> </td> 
+				  	<td>
+				  	<input type="text" id="inventoryInput" onkeyup="findItem(event)"> 
+				  	</td> 
+				  <tr>
+				  <tr>
+				  	<td colspan="2"><select id="inventoryItems"  name="inventoryItems" onchange="itemSelected()" single ></select> </td>
+				  </tr>
+				   </tr>
+				  	<td > <B>Qty:</B> </td> <td> <input type="text" name="quantity" id="quantity" value="1"/></td> 
+				  <tr>
+				   </tr>
+				  	<td > <B>Price:</B> </td> <td> <input type="text" name="price" id="price"/></td> 
+				 
+				 
+			</table>
+			<div class="logOut"><b><span  id="invoiceTotal"  name="invoiceTotal">Invoice Total: </span></b></div>
+			<div class="centerDiv"><input type="submit" value="Add to Cart &#x271A;" onclick="addToCart()" class="bigIcon"></div>
+			
+			<span  name="loginStatus" id="loginStatus"> </span>
+			
+			<div id="cart" name="cart"></div>
+			
+		
+			<div class="centerDiv"><input type="submit" value="Manual&#x270D;" onclick="toggleManualGrid()" class="bigIcon"></div>
+			
+			
+			
+			<div id="cartManualDiv" name="cartManualDiv"></div>
+			
+			
+			<div class="centerDiv" >	<input type="submit" value="Submit &#x2705;" id="submitCartButton" name="submitCartButton" onclick="submitCart()" class="bigIcon"></span>	</div>
+			<div class="logOut"><b><span  id="invoiceTotal2"  name="invoiceTotal2">Invoice Total: </span></b></div>
+			<div id="submitInvoiceResult" name="submitInvoiceResult"></div>
+			<br/></br/>
+			<B>Send Email: </B> <input type="text" name="toAddress" id="toAddress"/>
+			</br/></br/>
+			<div id="recentInvoices" name="recentInvoices"></div>
+		
+		</div><!--  sales/Invoice view -->	
+		
+	</div> <!--  Sales form -->
+	</main>
+</div><!-- Container -->	
+	
+</body>
+</html>
