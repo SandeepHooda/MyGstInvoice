@@ -50,7 +50,7 @@ public class Login extends HttpServlet {
 		if (null != registrationDetails && registrationDetails.getPwd().equals(pwd)){
 			populateInventoryGstRates(registrationDetails);
 			request.getSession().setAttribute("registrationDetails",registrationDetails );
-			response.getWriter().append(userID);
+			response.getWriter().append("{ \"id\":\""+userID+"\",\"logo\":\""+registrationDetails.getLogo()+"\"}");
 		}else {
 			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 		}

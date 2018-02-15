@@ -112,9 +112,11 @@ function loginWithUserIDAndPwd(userID , pwd){
 		if (this.readyState == 4 ) {
 			if (this.status == 200){
 				postLogin();
-				localStorage.setItem("userID",this.responseText);
+				let result = JSON.parse(this.responseText)
+				document.getElementById("imageTag").src = "/web/images/"+result.logo;
+				localStorage.setItem("userID",result.id);
 				localStorage.setItem("pwd",pwd);
-				document.getElementById("signOff").innerHTML = this.responseText +" Logout" ;
+				document.getElementById("signOff").innerHTML = result.id +" Logout" ;
 				
 			}else {
 				document.getElementById("login").style = "display: block;"
@@ -523,6 +525,7 @@ function tabMenu(){
     });
 }
 function onBodyLoad(){
+	
 	tabMenu();
 	showInvoice();
 	generateManualCart();
