@@ -9,6 +9,12 @@ let maxRowsInInvoiceGrid = 10;
 let ecommerce = false;
 let myCartTotal =0;
 let myManualCartTotal =0;
+function setSameAsShipping(){
+	if (document.getElementById("sameAsShipping").checked){
+		document.getElementById("billingAddress").value = document.getElementById("shippingAddress").value
+	}
+	
+}
 function logOut(){
 	
 	let xhr = null;
@@ -351,8 +357,8 @@ function publishCartItems(){
 	for (let i=0;i<myCart.length;i++){
 		myCartTotal += myCart[i].rowTotal;
 		cartItemsHtml += "<tr> <td class='gridLargeCol'> "+myCart[i].inventoryDesc +" : "+myCart[i].modelNo+"	 </td> <td> "+myCart[i].hsn+"	 </td> <td> "+myCart[i].quantity+" </td> <td> "+myCart[i].rate+" </td> <td> "+myCart[i].taxableValue+" </td>" +
-				"<td> "+myCart[i].cgstApplied+" @ "+myCart[i].cgst+"% </td><td> "+myCart[i].sgstApplied+" @ "+myCart[i].sgst+"% </td><td> "+myCart[i].igstApplied+" @ "+myCart[i].igst+"% </td><td> "+myCart[i].cessApplied+" @ "+myCart[i].cess+"% </td>" +
-						"<td> "+myCart[i].rowTotal+" </td> <td><span onclick=deleteFromCart('"+i+"') class='smallIcon'>&#x2718;</span></td> </tr>";
+				"<td> "+myCart[i].cgstApplied.toFixed(2)+" @ "+myCart[i].cgst+"% </td><td> "+myCart[i].sgstApplied.toFixed(2)+" @ "+myCart[i].sgst+"% </td><td> "+myCart[i].igstApplied.toFixed(2)+" @ "+myCart[i].igst+"% </td><td> "+myCart[i].cessApplied.toFixed(2)+" @ "+myCart[i].cess+"% </td>" +
+						"<td> "+myCart[i].rowTotal.toFixed(2)+" </td> <td><span onclick=deleteFromCart('"+i+"') class='smallIcon'>&#x2718;</span></td> </tr>";
 	}
 	cartItemsHtml += "</table>";
 	document.getElementById("cart").innerHTML = cartItemsHtml;
@@ -571,7 +577,11 @@ function submitCart(){
 		document.getElementById("submitInvoiceResult").innerHTML = "<br/></br/></br/><b><span style='color: red;'> Please add details for item sold to invoice before submitting. </span><b>"
 	}else {
 		invoiceDetails.customerName = document.getElementById("customerName").value;
+		invoiceDetails.customerPhone = document.getElementById("customerPhone").value;
+		invoiceDetails.customerEmail = document.getElementById("customerEmail").value;
+		
 		invoiceDetails.shippingAddress  = document.getElementById("shippingAddress").value;
+		invoiceDetails.billingAddress = document.getElementById("billingAddress").value;
 		let shippingState = document.getElementById("shippingState");
 		if ( pleaseSelect != shippingState.options[shippingState.selectedIndex].value){
 			invoiceDetails.shippingState = shippingState.options[shippingState.selectedIndex].value

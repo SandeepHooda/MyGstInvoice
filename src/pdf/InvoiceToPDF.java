@@ -260,12 +260,13 @@ public class InvoiceToPDF {
 		   
 		   int customerDetailsX = 20;
 		   createHeadings(cb,customerDetailsX,660,"Customer Name: "+invoiceDetails.getCustomerName());
-		   createHeadings(cb,customerDetailsX,650,"Address: "+invoiceDetails.getShippingAddress());
+		   createHeadings(cb,customerDetailsX,650,"Shipping Address: "+invoiceDetails.getShippingAddress());
 		   createHeadings(cb,customerDetailsX,640,"State: "+invoiceDetails.getShippingState());
 		   createHeadings(cb,customerDetailsX,630,"Contact: "+invoiceDetails.getCustomerPhone() +" "+invoiceDetails.getCustomerEmail());
+		   createHeadings(cb,customerDetailsX,620,"Billing Address: "+invoiceDetails.getBillingAddress());
 		   
-		   cb.moveTo(20,620);
-		   cb.lineTo(570,620);
+		   cb.moveTo(20,610);
+		   cb.lineTo(570,610);
 		   cb.stroke();
 
 		  }

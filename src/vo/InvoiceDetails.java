@@ -13,6 +13,7 @@ public class InvoiceDetails {
 	private long invoiceTime;
 	private String customerName;
 	private String shippingAddress;
+	private String billingAddress;
 	private String shippingState;
 	private String customerPhone;
 	private String customerEmail;
@@ -116,4 +117,11 @@ public class InvoiceDetails {
 	public void setEcommerceGSTN(String ecommerceGSTN) {
 		this.ecommerceGSTN = ecommerceGSTN;
 	}
+	public String getBillingAddress() {
+		return billingAddress;
+	}
+	public void setBillingAddress(String billingAddress) {
+		this.billingAddress = billingAddress;
+	}
+	
 }

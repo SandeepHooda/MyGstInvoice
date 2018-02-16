@@ -102,18 +102,36 @@
 			<div id="reports" name="reports"></div>
 	</div> <!--  Sales /repors -->
 	<div id="invoiceView" name="invoiceView" >
+	<span class="required">* Indicates required fields</span><br/>
 		<input type="checkbox" name="eCommerceCheckBox" id="eCommerceCheckBox" onchange="setEcommerce(event)" >
 		 	 <label for="eCommerceCheckBox" ><B>e-Commerce:</B></label>
 			<table class="loginPage" >
 				<tr>
-				 	<td> <B>Customer Name: </B></td> <td> <input type="text" name="customerName" id="customerName"/></td> 
+				 	<td> <B>Customer Name: </B><span class="required">*</span></td> <td> <input type="text" name="customerName" id="customerName"/></td> 
 				 </tr>
 				 <tr>
-				 	 <td> <B>Shipping Address:</B></td> <td>  <textarea rows="6"  name="shippingAddress" id="shippingAddress"></textarea></td> 
+				 	<td> <B>Customer Phone: </B></td> <td> <input type="text" name="customerPhone" id="customerPhone"/></td> 
+				 </tr>
+				 <tr>
+				 	<td> <B>Customer Email: </B></td> <td> <input type="text" name="customerEmail" id="customerEmail"/></td> 
+				 </tr>
+				
+				 <tr>
+				 	 <td> <B>Shipping Address:</B><span class="required">*</span></td> <td>  <textarea onkeyup='setSameAsShipping()' rows="6"  name="shippingAddress" id="shippingAddress"></textarea></td> 
 				  </tr>
-				  	<td> <B>State:</B></td> <td> <select id="shippingState" name="shippingState" onchange="saveFavouriteStateCode()"></select></td>
 				  <tr>
+				  	<td> <B>Shipping State:</B><span class="required">*</span></td> <td> <select id="shippingState" name="shippingState" onchange="saveFavouriteStateCode()"></select></td>
 				  </tr>
+				   <tr>
+				 	 <td> <input type="checkbox" name="sameAsShipping" id="sameAsShipping" onchange="setSameAsShipping()" value="same" >
+		 	 		</td> 
+		 	 		<td><label for="sameAsShipping" ><B>Same as Shipping Address:</B></label></td>
+				  </tr>
+				   
+				  <tr>
+				 	 <td> <B>Billing Address:</B></td> <td>  <textarea rows="6"  name="billingAddress" id="billingAddress"></textarea></td> 
+				  </tr>
+				 
 				  	<td > <B>Item:</B> </td> 
 				  	<td>
 				  	<input type="text" id="inventoryInput" onkeyup="findItem(event)"> 
