@@ -111,7 +111,7 @@ public class InvoiceToPDF {
 		
 
 		   // Invoice Header box Text Headings 
-		   createHeadings(cb,422,743,"Invoice No:");
+		   createHeadings(cb,422,733,"Invoice No:");
 		   createHeadings(cb,422,723,"Invoice Date:");
 		  
 		   //createHeadings(cb,422,703,"");
@@ -237,16 +237,17 @@ public class InvoiceToPDF {
 
 		  try {
 		   int registerationDetailsX = 130;
-		   createHeadings(cb,registerationDetailsX,750,registration.getbName());
-		   createHeadings(cb,registerationDetailsX,735,"GSTIN: "+registration.getGSTIN());
-		   createHeadings(cb,registerationDetailsX,720,"State: "+registration.getState());
-		   createHeadings(cb,registerationDetailsX,705,"PAN: "+registration.getPan());
-		   createHeadings(cb,registerationDetailsX,690,"Phone: "+registration.getPhone());
-		   createHeadings(cb,registerationDetailsX,675,"Email: "+registration.getEmail());
+		   createHeadings(cb,registerationDetailsX,760,registration.getbName());
+		   createHeadings(cb,registerationDetailsX,750,registration.getAddress());
+		   createHeadings(cb,registerationDetailsX,740,"GSTIN: "+registration.getGSTIN());
+		   createHeadings(cb,registerationDetailsX,730,"State: "+registration.getState());
+		   createHeadings(cb,registerationDetailsX,720,"PAN: "+registration.getPan());
+		   createHeadings(cb,registerationDetailsX,710,"Phone: "+registration.getPhone());
+		   createHeadings(cb,registerationDetailsX,700,"Email: "+registration.getEmail());
 		   
 		   
 		  
-		   createHeadings(cb,482,743 ,""+invoiceDetails.getInvoiceNo());
+		   createHeadings(cb,482,733 ,""+invoiceDetails.getInvoiceNo());
 		   createHeadings(cb,482,723,invoiceDetails.getInvoiceDateFormatted());
 		   CMYKColor magentaColor = new CMYKColor(0.f, 1.f, 0.f, 0.f);
 		   cb.setColorStroke(magentaColor);

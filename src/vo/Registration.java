@@ -22,6 +22,7 @@ public class Registration implements Serializable{
 	private String email;
 	private String logo ="durga.png";
 	private String ownerName;
+	private String address;
 	
 	private List<Product> products;
 	private List<Inventory> inventory;
@@ -123,6 +124,12 @@ public class Registration implements Serializable{
 	}
 	public void setOwnerName(String ownerName) {
 		this.ownerName = ownerName;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 }
