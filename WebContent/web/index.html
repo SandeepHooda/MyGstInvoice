@@ -59,7 +59,7 @@
 </nav> 
 	<!-- Hamburger  -->
 	<br/>
-	<img id="imageTag" name="imageTag" alt="Logo" src="/web/images/durga.png" height="70" width="70">
+	<img id="imageTag" name="imageTag" alt="Logo" src="/web/images/durga.png" height="120" width="120" style="padding-top: 10px">
 	<a id="signOff" name="signOff" onclick="logOut()" class="logOut">Logout</a>
 	<br/><br/><br/><br/>
 	
@@ -150,7 +150,7 @@
 		 </div>
 		 
 		 <div class="anElement">
-		 <label><B>Vehicle no:</B></label>
+		 <label><B>Vehicle no:</B></label><br />
 		 <input type="text" name="vehicleNo" id="vehicleNo"/><br />
 		 </div>
 		 
@@ -161,26 +161,27 @@
 		 
 		 <div class="anElement">
 		 <hr/>
-		 <label><B>Item:</B></label>
+		 <label><B>Item:</B></label><br/>
 		 <input type="text" id="inventoryInput" onkeyup="findItem(event)"/> <br />
 		 <select id="inventoryItems"  name="inventoryItems" onchange="itemSelected()" single ></select><br/>
 		 <hr/>
 		 </div>
 		 
 		 <div class="anElement">
-		 <label><B>Qty:</B></label>
+		 <label><B>Qty:</B></label><br/>
 		 <input type="text" name="quantity" id="quantity" value="1"/><br />
 		 </div>
 		 
 		 <div class="anElement">
-		 <label><B>Price:</B></label>
+		 <label><B>Price:</B></label><br/>
 		 <input type="text" name="price" id="price"/><br />
 		 </div>
 	</div>
 		
 		 	 
 			
-			<div class="logOut"><b><span  id="invoiceTotal"  name="invoiceTotal">Invoice Total: </span></b></div>
+			<div class="invoicetotal"><b><span  id="invoiceTotal"  name="invoiceTotal">Invoice Total: </span></b></div>
+			<br/></br/>
 			<div class="centerDiv"><input type="submit" value="Add to Cart &#x271A;" onclick="addToCart()" class="bigIcon"></div>
 			
 			<span  name="loginStatus" id="loginStatus"> </span>
@@ -196,10 +197,10 @@
 			
 			
 			<div class="centerDiv" >	<input type="submit" value="Submit &#x2705;" id="submitCartButton" name="submitCartButton" onclick="submitCart()" class="bigIcon"></span>	</div>
-			<div class="logOut"><b><span  id="invoiceTotal2"  name="invoiceTotal2">Invoice Total: </span></b></div>
+			<div class="invoicetotal"><b><span  id="invoiceTotal2"  name="invoiceTotal2">Invoice Total: </span></b></div><br/></br/>
 			<div id="submitInvoiceResult" name="submitInvoiceResult"></div>
 			<br/></br/>
-			<B>Send Email: </B> <input type="text" name="toAddress" id="toAddress"/>
+			<B>Send Email: </B> <br/><input class="email" type="text" name="toAddress" id="toAddress"/>
 			</br/></br/>
 			<div id="recentInvoices" name="recentInvoices"></div>
 		

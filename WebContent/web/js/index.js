@@ -350,7 +350,7 @@ function showInvoiceTotal(){
 }
 function publishCartItems(){
 	myCartTotal = 0;
-	let cartItemsHtml = "<table class='grid' border='1' >";
+	let cartItemsHtml = "<table class='grid' border='1' width='80%'>";
 	cartItemsHtml += "<tr class='gridLargeCol'> <th> Item  </th><th> HSN  </th> <th> Quantity </th> <th> Rate </th> <th class='gridSmallCol'> Taxable Value </th>" +
 	"<th> CGST </th><th> SGST </th><th> IGST </th><th> CESS </th><th> Total </th>" +
 			"<th> Remove </th></tr>";
@@ -713,7 +713,7 @@ function setEcommerce(event){
 }
 function showRcentInvoices( rcentInvoices, asReport){
 	
-	let html = "<table class='grid' border='1' >";
+	let html = "<table class='grid' border='1' width='100%'>";
 	html += "<tr> <th> Invoice No  </th><th> Date  </th> <th> Customer Name </th> <th>Print</th> <th>Email</th> </tr>";
 	var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 	for (let i=0;i<rcentInvoices.length;i++){

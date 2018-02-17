@@ -8,22 +8,28 @@
          
 }
 .invoiceForm input {
-        width: 100%;
+        width: 95%;
         clear: both;
         height: 30px; 
         font-size :30px;
 }
 
 .invoiceForm textarea {
-        width: 100%;
+        width: 95%;
         clear: both;
         font-size :30px;
          
 }
 .invoiceForm select {
-        width: 100%;
+        width: 95%;
         clear: both;
          height: 30px; 
+}
+.email{
+	width: 95%;
+        clear: both;
+        height: 30px; 
+        font-size :30px;
 }
 body{
 width:100%;
@@ -105,6 +111,19 @@ table textarea{
 	float: right;
     color: #ffff00;
     roght: 5px;
+    height: 30px; 
+    font-size :30px;
+}
+
+.invoicetotal{
+	font-weight: bold;
+	float: left;
+    color: #ffff00;
+    roght: 5px;
+    height: 30px; 
+    font-size :30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 
@@ -173,8 +192,9 @@ nav {
     background-color :#283e60;
     text-align: left;
     border-left:1px solid #E0E0E0;
-    line-height: 24px;
+    line-height: 54px;
     padding: 10px;
+    font-size: 30px;
  }
  .hamburger {
 	display :block;
