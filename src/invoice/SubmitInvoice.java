@@ -45,7 +45,7 @@ public class SubmitInvoice extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Gson  json = new Gson();
 		String invoiceDetailsStr = request.getParameter("invoiceDetails");
-		invoiceDetailsStr = invoiceDetailsStr.replaceAll("[^\\d. A-Za-z:\\\"\\-{},\\[\\]]", "");
+		invoiceDetailsStr = invoiceDetailsStr.replaceAll("[^\\d. A-Za-z:\\\"\\-{},\\[\\]@()]", "");
 		/*System.out.println(" invoiceDetailsStr ="+invoiceDetailsStr);
 		JsonReader reader = new JsonReader(new StringReader(invoiceDetailsStr));
 		reader.setLenient(true);*/

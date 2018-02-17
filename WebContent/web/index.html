@@ -103,66 +103,83 @@
 	</div> <!--  Sales /repors -->
 	<div id="invoiceView" name="invoiceView" >
 	<span class="required">* Indicates required fields</span><br/>
+		
 		<input type="checkbox" name="eCommerceCheckBox" id="eCommerceCheckBox" onchange="setEcommerce(event)" >
-		 	 <label for="eCommerceCheckBox" ><B>e-Commerce:</B></label>
-			<table class="loginPage" >
-				<tr>
-				 	<td> <B>Customer Name: </B><span class="required">*</span></td> <td> <input type="text" name="customerName" id="customerName"/></td> 
-				 </tr>
-				 <tr>
-				 	<td> <B>Customer Phone: </B></td> <td> <input type="text" name="customerPhone" id="customerPhone"/></td> 
-				 </tr>
-				 <tr>
-				 	<td> <B>Customer Email: </B></td> <td> <input type="text" name="customerEmail" id="customerEmail"/></td> 
-				 </tr>
-				
-				 <tr>
-				 	 <td> <B>Shipping Address:</B><span class="required">*</span></td> <td>  <textarea onkeyup='setSameAsShipping()' rows="6"  name="shippingAddress" id="shippingAddress"></textarea></td> 
-				  </tr>
-				  <tr>
-				  	<td> <B>Shipping State:</B><span class="required">*</span></td> <td> <select id="shippingState" name="shippingState" onchange="saveFavouriteStateCode()"></select></td>
-				  </tr>
-				   <tr>
-				 	 <td> <input type="checkbox" name="sameAsShipping" id="sameAsShipping" onchange="setSameAsShipping()" value="same" >
-		 	 		</td> 
-		 	 		<td><label for="sameAsShipping" ><B>Same as Shipping Address:</B></label></td>
-				  </tr>
-				   
-				  <tr>
-				 	 <td> <B>Billing Address:</B></td> <td>  <textarea rows="6"  name="billingAddress" id="billingAddress"></textarea></td> 
-				  </tr>
-				 <tr>
-				 	<td> <B>Mode of transport: </B></td> <td><select id="modeOfTransport" name="modeOfTransport" ></select></td> 
-				 </tr>
-				 <tr>
-				 	<td> <B>Vehicle no: </B></td> <td><input type="text" name="vehicleNo" id="vehicleNo"/></td> 
-				 </tr>
-				 <tr>
-				 	<td> <B>Approximate Distance (in KM): </B></td> <td><input type="text" name="approxDistanceKm" id="approxDistanceKm"/></td> 
-				 </tr>
-				 <tr>
-				  	<td colspan="2"><hr/> </td>
-				  </tr>
-				 <tr>
-				  	<td > <B>Item Filter:</B> </td> 
-				  	<td>
-				  	<input type="text" id="inventoryInput" onkeyup="findItem(event)"> 
-				  	</td> 
-				  </tr>
-				  <tr>
-				  	<td colspan="2"><select id="inventoryItems"  name="inventoryItems" onchange="itemSelected()" single ></select> </td>
-				  </tr>
-				  <tr>
-				  	<td colspan="2"><hr/> </td>
-				  </tr>
-				   </tr>
-				  	<td > <B>Qty:</B> </td> <td> <input type="text" name="quantity" id="quantity" value="1"/></td> 
-				  <tr>
-				   </tr>
-				  	<td > <B>Price:</B> </td> <td> <input type="text" name="price" id="price"/></td> 
-				 
-				 
-			</table>
+		<label for="eCommerceCheckBox" ><B>e-Commerce:</B></label><br />
+	<div class="invoiceForm">
+	
+		<div class="anElement">
+ 		 <label><B>Customer Name<span class="required">*</span>: </B></label>
+		 <input type="text" name="customerName" id="customerName"/><br />
+		 </div>
+		 
+		 <div class="anElement">
+		 <label><B>Customer Phone: </B></label>
+		 <input type="text" name="customerPhone" id="customerPhone"/><br />
+		  </div>
+		  
+		  <div class="anElement">
+		 <label><B>Customer Email: </B></label>
+		 <input type="text" name="customerEmail" id="customerEmail"/><br />
+		 </div>
+		
+		 
+		 <div class="anElement">
+		 <label><B>Shipping Address:</B><span class="required">*</span></label>
+		 <textarea onkeyup='setSameAsShipping()' rows="6"  name="shippingAddress" id="shippingAddress"></textarea><br />
+		 </div>
+		 
+		 <div class="anElement">
+		 <label><B>Shipping State:</B><span class="required">*</span></label>
+		 <select id="shippingState" name="shippingState" onchange="saveFavouriteStateCode()"></select><br />
+		 </div>
+	</div>
+		<div class="anElement">
+		<input type="checkbox" name="sameAsShipping" id="sameAsShipping" onchange="setSameAsShipping()" value="same" >
+		<label for="sameAsShipping" ><B>Billing address same as Shipping Address:</B></label><br />
+		</div>
+	<div class="invoiceForm">
+		<div class="anElement">
+		 <label><B>Billing Address:</B></label>
+		 <textarea rows="6"  name="billingAddress" id="billingAddress"></textarea><br />
+		 </div>
+		 
+		 <div class="anElement">
+		 <label><B>Mode of transport:</B></label>
+		 <select id="modeOfTransport" name="modeOfTransport" ></select><br />
+		 </div>
+		 
+		 <div class="anElement">
+		 <label><B>Vehicle no:</B></label>
+		 <input type="text" name="vehicleNo" id="vehicleNo"/><br />
+		 </div>
+		 
+		 <div class="anElement">
+		 <label><B>Approximate Distance (in KM):</B></label>
+		 <input type="text" name="approxDistanceKm" id="approxDistanceKm"/><br />
+		 </div>
+		 
+		 <div class="anElement">
+		 <hr/>
+		 <label><B>Item:</B></label>
+		 <input type="text" id="inventoryInput" onkeyup="findItem(event)"/> <br />
+		 <select id="inventoryItems"  name="inventoryItems" onchange="itemSelected()" single ></select><br/>
+		 <hr/>
+		 </div>
+		 
+		 <div class="anElement">
+		 <label><B>Qty:</B></label>
+		 <input type="text" name="quantity" id="quantity" value="1"/><br />
+		 </div>
+		 
+		 <div class="anElement">
+		 <label><B>Price:</B></label>
+		 <input type="text" name="price" id="price"/><br />
+		 </div>
+	</div>
+		
+		 	 
+			
 			<div class="logOut"><b><span  id="invoiceTotal"  name="invoiceTotal">Invoice Total: </span></b></div>
 			<div class="centerDiv"><input type="submit" value="Add to Cart &#x271A;" onclick="addToCart()" class="bigIcon"></div>
 			
