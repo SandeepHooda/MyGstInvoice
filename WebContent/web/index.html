@@ -131,14 +131,29 @@
 				  <tr>
 				 	 <td> <B>Billing Address:</B></td> <td>  <textarea rows="6"  name="billingAddress" id="billingAddress"></textarea></td> 
 				  </tr>
-				 
-				  	<td > <B>Item:</B> </td> 
+				 <tr>
+				 	<td> <B>Mode of transport: </B></td> <td><select id="modeOfTransport" name="modeOfTransport" ></select></td> 
+				 </tr>
+				 <tr>
+				 	<td> <B>Vehicle no: </B></td> <td><input type="text" name="vehicleNo" id="vehicleNo"/></td> 
+				 </tr>
+				 <tr>
+				 	<td> <B>Approximate Distance (in KM): </B></td> <td><input type="text" name="approxDistanceKm" id="approxDistanceKm"/></td> 
+				 </tr>
+				 <tr>
+				  	<td colspan="2"><hr/> </td>
+				  </tr>
+				 <tr>
+				  	<td > <B>Item Filter:</B> </td> 
 				  	<td>
 				  	<input type="text" id="inventoryInput" onkeyup="findItem(event)"> 
 				  	</td> 
-				  <tr>
+				  </tr>
 				  <tr>
 				  	<td colspan="2"><select id="inventoryItems"  name="inventoryItems" onchange="itemSelected()" single ></select> </td>
+				  </tr>
+				  <tr>
+				  	<td colspan="2"><hr/> </td>
 				  </tr>
 				   </tr>
 				  	<td > <B>Qty:</B> </td> <td> <input type="text" name="quantity" id="quantity" value="1"/></td> 

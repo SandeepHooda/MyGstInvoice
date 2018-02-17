@@ -22,6 +22,9 @@ public class InvoiceDetails {
 	private long invoiceNo;
 	private String modeOfSale = "OE";//E = ecomerce, OE = other that Ecommerce
 	private String ecommerceGSTN;
+	private String modeOfTransport;
+	private String vehicleNo;
+	private String approxDistanceKm;
 	
 	
 	public long getInvoiceTime() {
@@ -123,5 +126,25 @@ public class InvoiceDetails {
 	public void setBillingAddress(String billingAddress) {
 		this.billingAddress = billingAddress;
 	}
+	public String getModeOfTransport() {
+		return modeOfTransport;
+	}
+	public void setModeOfTransport(String modeOfTransport) {
+		this.modeOfTransport = modeOfTransport;
+	}
+	
+	public String getApproxDistanceKm() {
+		return approxDistanceKm;
+	}
+	public void setApproxDistanceKm(String approxDistanceKm) {
+		this.approxDistanceKm = approxDistanceKm;
+	}
+	public String getVehicleNo() {
+		return vehicleNo;
+	}
+	public void setVehicleNo(String vehicleNo) {
+		this.vehicleNo = vehicleNo;
+	}
+	
 	
 }

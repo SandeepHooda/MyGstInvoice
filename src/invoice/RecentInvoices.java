@@ -77,7 +77,13 @@ public class RecentInvoices extends HttpServlet {
 					List<InvoiceItem> items = invoice.getMyCart();
 					items.addAll(invoice.getMyCartManual());
 					for (InvoiceItem item: items){
-						String lineItem = commonFields +(item.getCgst()+item.getSgst()+item.getIgst())+","+item.getTaxableValue()+","+invoice.getEcommerceGSTN()+"\n";
+						String billingAddress = invoice.getBillingAddress();
+						if (null != billingAddress){
+							billingAddress = billingAddress.replaceAll(",", " ");
+						}else {
+							billingAddress = "";
+						}
+						String lineItem = commonFields +(item.getCgst()+item.getSgst()+item.getIgst())+","+item.getTaxableValue()+","+invoice.getEcommerceGSTN()+","+billingAddress+"\n";
 						outputStream.write(lineItem.getBytes());
 					}
 					 

@@ -111,9 +111,12 @@ public class InvoiceToPDF {
 		
 
 		   // Invoice Header box Text Headings 
-		   createHeadings(cb,422,733,"Invoice No:");
-		   createHeadings(cb,422,723,"Invoice Date:");
-		  
+		   createHeadings(cb,422,740,"Invoice No:");
+		   createHeadings(cb,422,730,"Invoice Date:");
+		   createHeadings(cb,422,720,"Mode of Transport:");
+		   createHeadings(cb,422,710,"Vehicle No:");
+		   createHeadings(cb,422,700,"Approx distance (KM):");
+		   
 		   //createHeadings(cb,422,703,"");
 
 		   // Invoice Detail box layout 
@@ -247,8 +250,11 @@ public class InvoiceToPDF {
 		   
 		   
 		  
-		   createHeadings(cb,482,733 ,""+invoiceDetails.getInvoiceNo());
-		   createHeadings(cb,482,723,invoiceDetails.getInvoiceDateFormatted());
+		   createHeadings(cb,510,740 ,""+invoiceDetails.getInvoiceNo());
+		   createHeadings(cb,510,730,invoiceDetails.getInvoiceDateFormatted());
+		   createHeadings(cb,510,720,invoiceDetails.getModeOfTransport());
+		   createHeadings(cb,510,710,invoiceDetails.getVehicleNo());
+		   createHeadings(cb,510,700,invoiceDetails.getApproxDistanceKm());
 		   CMYKColor magentaColor = new CMYKColor(0.f, 1.f, 0.f, 0.f);
 		   cb.setColorStroke(magentaColor);
 		   cb.setLineWidth(1f);
@@ -258,6 +264,8 @@ public class InvoiceToPDF {
 		   cb.moveTo(20,670);
 		   cb.lineTo(570,670);
 		   cb.stroke();
+		   
+		   createHeadings(cb,280,680,"Tax Invoice");
 		   
 		   int customerDetailsX = 20;
 		   createHeadings(cb,customerDetailsX,660,"Customer Name: "+invoiceDetails.getCustomerName());

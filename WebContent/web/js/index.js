@@ -511,6 +511,33 @@ function pupulateStateCodes(stateCodesArray){
 	
 	
 }
+function pupulateModesOfTransport(){
+	let modeOfTransport = document.getElementById("modeOfTransport");
+	
+	
+	let option = document.createElement('option');
+	option.text = option.value = "";
+	modeOfTransport.add(option);
+	
+	option = document.createElement('option');
+	option.text = option.value = "Road";
+	modeOfTransport.add(option);
+	
+	option = document.createElement('option');
+	option.text = option.value = "Rail";
+	modeOfTransport.add(option);
+	
+	option = document.createElement('option');
+	option.text = option.value = "Air";
+	modeOfTransport.add(option);
+	
+	option = document.createElement('option');
+	option.text = option.value = "Ship";
+	modeOfTransport.add(option);
+	
+	
+	
+}
 function postLogin(){
 	document.getElementById("loginStatus").innerHTML = "";
 	document.getElementById("login").style = "display: none;";
@@ -535,6 +562,7 @@ function onBodyLoad(){
 	tabMenu();
 	showInvoice();
 	generateManualCart();
+	pupulateModesOfTransport();
 	let userID = localStorage.getItem("userID");
 	
 	//Show login form only when user is logged out
@@ -582,10 +610,18 @@ function submitCart(){
 		
 		invoiceDetails.shippingAddress  = document.getElementById("shippingAddress").value;
 		invoiceDetails.billingAddress = document.getElementById("billingAddress").value;
+		
 		let shippingState = document.getElementById("shippingState");
 		if ( pleaseSelect != shippingState.options[shippingState.selectedIndex].value){
 			invoiceDetails.shippingState = shippingState.options[shippingState.selectedIndex].value
 		}
+		
+		let modeOfTransport = document.getElementById("modeOfTransport");
+		invoiceDetails.modeOfTransport = modeOfTransport.options[modeOfTransport.selectedIndex].value;
+		
+		invoiceDetails.vehicleNo = document.getElementById("vehicleNo").value;
+		invoiceDetails.approxDistanceKm = document.getElementById("approxDistanceKm").value;
+		
 		if (!invoiceDetails.customerName || !invoiceDetails.shippingAddress || !invoiceDetails.shippingState){
 			document.getElementById("submitInvoiceResult").innerHTML = "<br/></br/></br/><b><span style='color: red;'> Customer name, addres and shipping state are mandatory fields. </span><b>";
 		}else {
