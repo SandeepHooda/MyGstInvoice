@@ -70,7 +70,8 @@ public class RecentInvoices extends HttpServlet {
 				response.setContentType("text/csv");
 				response.setHeader("Content-Disposition", "attachment; filename=\""+year+"_"+month+".csv\"");
 				OutputStream outputStream = response.getOutputStream();
-				String header = "Type,Place Of Supply,Rate,Taxable Value,Cess Amount,E-Commerce GSTIN\n";
+				String header = "Type,Place Of Supply,Rate,Taxable Value,Cess Amount,E-Commerce GSTIN,Invoice No, Date and Time, Mode of Transport, Vehicle No,"
+						+ "Approx Distance Km,Customer Name, Shipping Address, Billing Address, \n";
 				outputStream.write(header.getBytes());
 				for (InvoiceDetails invoice: invoiceList){
 					String commonFields = invoice.getModeOfSale()+","+invoice.getShippingState()+",";
@@ -83,7 +84,16 @@ public class RecentInvoices extends HttpServlet {
 						}else {
 							billingAddress = "";
 						}
-						String lineItem = commonFields +(item.getCgst()+item.getSgst()+item.getIgst())+","+item.getTaxableValue()+","+invoice.getEcommerceGSTN()+","+billingAddress+"\n";
+						String shippingAddress = invoice.getShippingAddress();
+						if (null != shippingAddress){
+							shippingAddress = shippingAddress.replaceAll(",", " ");
+						}else {
+							shippingAddress = "";
+						}
+						String lineItem = commonFields +(item.getCgst()+item.getSgst()+item.getIgst())+","+item.getTaxableValue()+","+item.getCessApplied()+","+invoice.getEcommerceGSTN()
+						+","+invoice.getInvoiceNo()+","+invoice.getInvoiceDateFormatted()+","+invoice.getModeOfTransport()+","+invoice.getVehicleNo()
+						+","+invoice.getApproxDistanceKm()+","+invoice.getCustomerName()+","+shippingAddress+","+billingAddress
+						+"\n";
 						outputStream.write(lineItem.getBytes());
 					}
 					 

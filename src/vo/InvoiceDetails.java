@@ -22,9 +22,9 @@ public class InvoiceDetails {
 	private long invoiceNo;
 	private String modeOfSale = "OE";//E = ecomerce, OE = other that Ecommerce
 	private String ecommerceGSTN;
-	private String modeOfTransport;
-	private String vehicleNo;
-	private String approxDistanceKm;
+	private String modeOfTransport ="";
+	private String vehicleNo ="";
+	private String approxDistanceKm ="";
 	
 	
 	public long getInvoiceTime() {
