@@ -59,6 +59,8 @@ public class InvoiceToPDF {
 		   allItems.addAll(invoiceDetails.getMyCart());
 		   allItems.addAll(invoiceDetails.getMyCartManual());
 		   int index = 0;
+		   //Test invoice with multiple items
+		   //allItems.add(allItems.get(0));allItems.add(allItems.get(0));allItems.add(allItems.get(0));allItems.add(allItems.get(0));allItems.add(allItems.get(0));allItems.add(allItems.get(0));allItems.add(allItems.get(0));allItems.add(allItems.get(0));allItems.add(allItems.get(0));allItems.add(allItems.get(0));allItems.add(allItems.get(0));allItems.add(allItems.get(0));allItems.add(allItems.get(0));allItems.add(allItems.get(0));
 		   for(InvoiceItem aItem: allItems ){
 		    if(beginPage){
 		     beginPage = false;
@@ -69,12 +71,13 @@ public class InvoiceToPDF {
 		    int linesConsumed = generateDetail(doc, cb, ++index, penPosY, aItem);
 		    
 		    penPosY -= ++linesConsumed *lineHeight;
-		    if(penPosY < 150){
+		    if(penPosY < 250){
 		     printPageNumber(cb, false);
 		     doc.newPage();
 		     beginPage = true;
 		    }
 		   }
+		   printTermsAndConditions(cb,  registration.getTermsAndConditions());
 		   printPageNumber(cb, true);
 		   printTotal(cb, invoiceDetails);
 		   
@@ -120,11 +123,15 @@ public class InvoiceToPDF {
 		   //createHeadings(cb,422,703,"");
 
 		   // Invoice Detail box layout 
-		   cb.rectangle(20,50,550,550);
+		   int verticalLineStart = 600;
+		   int verticalLineEnd = 150;
+		   int boxWidth = 550;
+		   int boxHeight = 450;
+		   cb.rectangle(20,verticalLineEnd,boxWidth,boxHeight);
 		   cb.moveTo(20,585);
 		   cb.lineTo(570,585);
 		   
-		   int verticalLineHeight = 600;
+		   
 		   
 		   
 		   
@@ -135,40 +142,40 @@ public class InvoiceToPDF {
 		   createHeadings(cb,headingX,headingY,"Item");
 		   headingX += itemWidth;
 		   createHeadings(cb,headingX,headingY,"HSN");
-		   cb.moveTo(headingX-marginLeft,50);
-		   cb.lineTo(headingX-marginLeft,verticalLineHeight);
+		   cb.moveTo(headingX-marginLeft,verticalLineEnd);
+		   cb.lineTo(headingX-marginLeft,verticalLineStart);
 		   headingX += hsnWidth;
 		   createHeadings(cb,headingX,headingY,"Qty");
-		   cb.moveTo(headingX-marginLeft,50);
-		   cb.lineTo(headingX-marginLeft,verticalLineHeight);
+		   cb.moveTo(headingX-marginLeft,verticalLineEnd);
+		   cb.lineTo(headingX-marginLeft,verticalLineStart);
 		   headingX += qtyWidth;
 		   createHeadings(cb,headingX,headingY,"Price");
-		   cb.moveTo(headingX-marginLeft,50);
-		   cb.lineTo(headingX-marginLeft,verticalLineHeight);
+		   cb.moveTo(headingX-marginLeft,verticalLineEnd);
+		   cb.lineTo(headingX-marginLeft,verticalLineStart);
 		   headingX += priceWidth;
 		   createHeadings(cb,headingX,headingY,"Taxable value");
-		   cb.moveTo(headingX-marginLeft,50);
-		   cb.lineTo(headingX-marginLeft,verticalLineHeight);
+		   cb.moveTo(headingX-marginLeft,verticalLineEnd);
+		   cb.lineTo(headingX-marginLeft,verticalLineStart);
 		   headingX += taxableWidth;
 		   createHeadings(cb,headingX,headingY,"CGST");
-		   cb.moveTo(headingX-marginLeft,50);
-		   cb.lineTo(headingX-marginLeft,verticalLineHeight);
+		   cb.moveTo(headingX-marginLeft,verticalLineEnd);
+		   cb.lineTo(headingX-marginLeft,verticalLineStart);
 		   headingX += taxWidth;
 		   createHeadings(cb,headingX,headingY,"SGST");
-		   cb.moveTo(headingX-marginLeft,50);
-		   cb.lineTo(headingX-marginLeft,verticalLineHeight);
+		   cb.moveTo(headingX-marginLeft,verticalLineEnd);
+		   cb.lineTo(headingX-marginLeft,verticalLineStart);
 		   headingX += taxWidth;
 		   createHeadings(cb,headingX,headingY,"IGST");
-		   cb.moveTo(headingX-marginLeft,50);
-		   cb.lineTo(headingX-marginLeft,verticalLineHeight);
+		   cb.moveTo(headingX-marginLeft,verticalLineEnd);
+		   cb.lineTo(headingX-marginLeft,verticalLineStart);
 		   headingX += taxWidth;
 		   createHeadings(cb,headingX,headingY,"CESS");
-		   cb.moveTo(headingX-marginLeft,50);
-		   cb.lineTo(headingX-marginLeft,verticalLineHeight);
+		   cb.moveTo(headingX-marginLeft,verticalLineEnd);
+		   cb.lineTo(headingX-marginLeft,verticalLineStart);
 		   headingX += cessWidth;
 		   createHeadings(cb,headingX,headingY,"Total");
-		   cb.moveTo(headingX-marginLeft,50);
-		   cb.lineTo(headingX-marginLeft,verticalLineHeight);
+		   cb.moveTo(headingX-marginLeft,verticalLineEnd);
+		   cb.lineTo(headingX-marginLeft,verticalLineStart);
 
 		   cb.stroke();
 		   //add the images
@@ -214,13 +221,13 @@ public class InvoiceToPDF {
 			 totalInvoice = totalTaxable +totalIgst+totalSgst+totalCgst+totalCess;
 			 
 			 //Draw Total line 
-			 cb.moveTo(20,70);
-			 cb.lineTo(570,70);
+			 cb.moveTo(20,170);
+			 cb.lineTo(570,170);
 			 CMYKColor black = new CMYKColor(0.f, 0.f, 0.f, 0.34f);
 			 cb.setColorStroke(black);
 			 cb.stroke();
 			 
-			 int totalPosY = 55;
+			 int totalPosY = 155;
 			 int totalPosX = 25;
 			 createHeadings(cb,totalPosX,totalPosY,"Total");
 			 totalPosX = 280;
@@ -359,6 +366,21 @@ public class InvoiceToPDF {
 
 		 }
 		 
+		 private void  printTermsAndConditions(PdfContentByte cb,  List<String> termsAndConditions){
+			 cb.beginText();
+			 cb.setFontAndSize(bfBold, 8);
+			 int tcPosition = 110;
+			 cb.showTextAligned(PdfContentByte.ALIGN_LEFT, "E.& O.E", 20 , tcPosition, 0);
+			 tcPosition -= 10;
+			 for(String tcText : termsAndConditions){
+				 cb.showTextAligned(PdfContentByte.ALIGN_LEFT, tcText, 20 , tcPosition, 0);
+				 tcPosition -= 10;
+			 }
+			 
+			  
+			  cb.endText();
+			 
+		 }
 		 private void printPageNumber(PdfContentByte cb, boolean isLastPage){
 
 
@@ -369,7 +391,7 @@ public class InvoiceToPDF {
 			  nextPageMsg = " End.";
 		  }
 		  cb.showTextAligned(PdfContentByte.ALIGN_RIGHT, "Page No. " + (pageNumber+1)+nextPageMsg, 570 , 25, 0);
-		  
+		  cb.showTextAligned(PdfContentByte.ALIGN_RIGHT, "Authorised Signature", 570 , 45, 0);
 		  cb.endText(); 
 		  
 		  pageNumber++;

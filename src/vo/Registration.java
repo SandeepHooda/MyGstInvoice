@@ -1,6 +1,7 @@
 package vo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Registration implements Serializable{
@@ -23,6 +24,7 @@ public class Registration implements Serializable{
 	private String logo ="durga.png";
 	private String ownerName;
 	private String address;
+	private List<String> termsAndConditions;
 	
 	private List<Product> products;
 	private List<Inventory> inventory;
@@ -130,6 +132,15 @@ public class Registration implements Serializable{
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	public List<String> getTermsAndConditions() {
+		if (null == termsAndConditions){
+			termsAndConditions = new ArrayList<>();
+		}
+		return termsAndConditions;
+	}
+	public void setTermsAndConditions(List<String> termsAndConditions) {
+		this.termsAndConditions = termsAndConditions;
 	}
 
 }
