@@ -251,6 +251,10 @@ function pupulateInventoryItems(inventoryData){
 	   
 	}
 	
+	if (inventoryData.length <20){
+		document.getElementById("inventoryInput").style = "display: none;" ;
+	}
+	
 	
 }
 function clearInventoryDropDown(){
@@ -310,11 +314,26 @@ function itemSelected(){
 }
 
 function addToCart(){
+	
 	let inventoryItems = document.getElementById("inventoryItems");
+	if ( pleaseSelect == inventoryItems.options[inventoryItems.selectedIndex].value){
+		alert("Please select an item to be added to cart");
+		return;
+	}
+	
 	let selectedProduct = JSON.parse(JSON.stringify(selectedProductFromList));
 	selectedProduct.item = selectedProduct.inventoryDesc +" : "+selectedProduct.modelNo; 
 	selectedProduct.quantity = document.getElementById("quantity").value ;
 	selectedProduct.rate = document.getElementById("price").value;
+	
+	if ( isNaN(selectedProduct.quantity) || selectedProduct.quantity <=0 ){
+		alert("Please enter correct quantity.");
+		return;
+	}
+	if ( isNaN(selectedProduct.rate) || selectedProduct.rate <=0 ){
+		alert("Please enter correct price.");
+		return;
+	}
 	selectedProduct.taxableValue = selectedProduct.quantity * selectedProduct.rate;
 	
 
@@ -375,7 +394,11 @@ function clearManualCartRow(rowItem){
 	if (response == true) {
 		for (let j=0;j<maxColumnsInInvoiceGrid-1;j++){
 			 document.getElementById("manualCartItem"+rowItem+j).value = "";
+			 if (j==4 || j==9){
+				 document.getElementById("manualCartItem"+rowItem+j).innerHTML = "";
+			 }
 		}
+		showInvoiceTotal();
 	} else {
 	    
 	}
@@ -456,7 +479,7 @@ function generateManualCart(){
 				cartItemsHtml +=" class='gridSmallInputbox' >";	 
 			}
 			if (j == maxColumnsInInvoiceGrid-1){
-				cartItemsHtml += "<span onclick=clearManualCartRow('"+i+"') class='bigIconRed'>&#x2718;</span></td>";
+				cartItemsHtml += "<span onclick=clearManualCartRow('"+i+"') class='smallIcon'>&#x2718;</span></td>";
 			}else if(j == maxColumnsInInvoiceGrid-2 || j == 4){
 				cartItemsHtml += "<span name='manualCartItem"+i+j+"' id='manualCartItem"+i+j+"' ></span></td>";
 			}
