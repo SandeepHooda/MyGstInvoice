@@ -12,27 +12,28 @@
 
 <div class="container">
 	<!-- Login  -->
-	<div id="login" name="login">
-	<table class="loginPage" >
-		<tr>
-		 	<td> <B>User Name: </B></td> <td> <input type="text" name="userName" id="userName"/></td> 
-		 </tr>
-		 <tr>
-		 	 <td> <B>Password:</B></td> <td>  <input type="password" name="pwd" id="pwd" onkeyup="showPassword(event)"/></td> 
-		  </tr>
-		  
-		  <tr>
-		  <td> <input type="submit" value="Reset password" onclick="resetPassword()" class="bigIcon"></td>
-		  	<td > <input type="submit" value="Submit" onclick="login()" class="bigIcon"> </td> 
-		  </tr>
-		  <tr>
-		  	<td colspan="2" name="loginStatus" id="loginStatus"> <span > </td> 
-		  </tr>
-	</table>
-
-		 	 <input type="checkbox" name="showPasswordCheckBox" id="showPasswordCheckBox" onchange="showPassword(event)" >
+	<div id="login" name="login" >
+	<div class="invoiceForm">
+	 	<div class="anElement">
+		 <label><B>User Name:</B></label><br/>
+		 <input type="text" name="userName" id="userName"/><br />
+		 </div>
+		 
+		 <div class="anElement">
+		 <label><B>Password:</B></label><br/>
+		 <input type="password" name="pwd" id="pwd" onkeyup="showPassword(event)"/><br /><br /><br />
+		 </div>
+	</div>	
+ 			<input type="checkbox" name="showPasswordCheckBox" id="showPasswordCheckBox" onchange="showPassword(event)" >
 		 	 <label for="showPasswordCheckBox" ><B>Show Password:</B></label>
-		 	 <span name="showPasswordSpan" id="showPasswordSpan"></span>
+		 	 <span name="showPasswordSpan" id="showPasswordSpan"></span><br /><br /><br />
+	<span style="width: 100%">
+		
+		 <input style="width: 40%"  type="submit" value="Reset password" onclick="resetPassword()" class="bigIcon">
+		 
+		 <input style="width: 40%" type="submit" value="Submit" onclick="login()" class="bigIcon"> <br /><br />
+	</span>
+		<span  name="loginStatus" id="loginStatus">  </span> 	
 		
 	</div>
 
@@ -64,10 +65,10 @@
 	<br/><br/><br/><br/>
 	
 	<div id="reportView" name="reportView" class="fullWidth">
-	<table class="loginPage" class="fullWidth">
-	<tr>
-		<td>
-			<select id="reportMonths" name="reportMonths" >
+	<div class="invoiceForm">
+	
+		<div class="anElement">
+ 		 <select id="reportMonths" name="reportMonths" >
 				  <option value="1">Jan</option>
 				  <option value="2">Feb</option>
 				  <option value="3">Mar</option>
@@ -80,26 +81,23 @@
 				  <option value="10">Oct</option>
 				  <option value="11">Nov</option>
 				  <option value="12">Dec</option>
-			</select> 
-		</td> 
-		<td>
-		<select id="reportYear" name="reportYear" onchange="itemSelected()">
+			</select> <br />
+		 </div>
+		 
+		 <div class="anElement">
+ 		 <select id="reportYear" name="reportYear" onchange="itemSelected()">
 			  <option value="2018">2018</option>
 			  <option value="2019">2019</option>
 			 
-		</select>
-		</td>
-	<tr>
-		<td>
-			<input type="submit" value="Get Report &#x2708;" onclick="fetchReport('html')" class="bigIcon">
-		</td>
-		<td>
-			<input type="submit" value="Export to XLS &#x2708;" onclick="fetchReport('csv')" class="bigIcon">
-		
-		</td>
-	</tr>
-	</table>
-			<div id="reports" name="reports"></div>
+		</select> <br /><br /><br />
+		 </div>
+   </div>
+   <span style="width: 100%">
+		<input style="width: 45%"  type="submit" value="Get Report &#x2708;" onclick="fetchReport('html')" class="bigIcon">
+		 <input style="width: 45%"  type="submit" value="Export to XLS &#x2708;" onclick="fetchReport('csv')" class="bigIcon"><br /><br />
+	</span>
+	
+	<div id="reports" name="reports"></div>
 	</div> <!--  Sales /repors -->
 	<div id="invoiceView" name="invoiceView" >
 	<span class="required">* Indicates required fields</span><br/>
@@ -184,7 +182,7 @@
 			<br/></br/>
 			<div class="centerDiv"><input type="submit" value="Add to Cart &#x271A;" onclick="addToCart()" class="bigIcon"></div>
 			
-			<span  name="loginStatus" id="loginStatus"> </span>
+			
 			
 			<div id="cart" name="cart"></div>
 			

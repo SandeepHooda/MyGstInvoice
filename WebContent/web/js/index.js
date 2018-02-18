@@ -127,7 +127,12 @@ function loginWithUserIDAndPwd(userID , pwd){
 			}else {
 				document.getElementById("login").style = "display: block;"
 				document.getElementById("salesForm").style = "display: none;" 
-				document.getElementById("loginStatus").innerHTML = "<span>Request failed.  Returned status of " + xhr.status+"</span>";
+					if (this.status == 401){
+						document.getElementById("loginStatus").innerHTML = "<span class='required'><b>Invalid User name/ Password </b></span>";
+					}else{
+						document.getElementById("loginStatus").innerHTML = "<span class='required'><b>Request failed.  Returned status of " + xhr.status+"</b></span>";
+					}
+				
 				
 			}
 		     
@@ -713,7 +718,7 @@ function setEcommerce(event){
 }
 function showRcentInvoices( rcentInvoices, asReport){
 	
-	let html = "<table class='grid' border='1' width='100%'>";
+	let html = "<table class='grid' border='1' width='90%'>";
 	html += "<tr> <th> Invoice No  </th><th> Date  </th> <th> Customer Name </th> <th>Print</th> <th>Email</th> </tr>";
 	var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 	for (let i=0;i<rcentInvoices.length;i++){

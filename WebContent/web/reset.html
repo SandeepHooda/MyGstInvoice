@@ -9,17 +9,18 @@
 <script src="/web/js/reset.js"></script>
 </head>
 <body onload="onBodyLoad()">
-<table >
-	<tr>
-		<td>Email Address:</td>
-		<td><input type="text" name="resetEmailInput" id="resetEmailInput"></td>
-	</tr>
-	<tr>
-		
-		<td><div class="leftDiv"><input type="submit" value="Back To Login"  onclick="backToLogin()" class="bigIcon"></div></td>
-		<td><div class="leftDiv"><input type="submit" value="Send Reset link"  onclick="sendResetLink()" class="bigIcon"></div></td>
-	</tr>
-</table>
+<div class="invoiceForm">
+	 	<div class="anElement">
+		 <label><B>Email Address:</B></label><br/>
+		 <input type="text" name="resetEmailInput" id="resetEmailInput"><br /><br /><br />
+		 </div>
+		 
+</div>
+	<span style="width: 100%">
+		<input style="width: 15%"  type="submit" value="Back To Login"  onclick="backToLogin()" class="bigIcon">
+		 <input style="width: 15%"  type="submit" value="Send Reset link"  onclick="sendResetLink()" class="bigIcon"> <br /><br />
+	</span>
+
 	 
 	
 	
