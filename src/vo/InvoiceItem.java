@@ -22,6 +22,9 @@ public class InvoiceItem {
 		this.item = item;
 	}
 	public String getHsn() {
+		if (null == hsn){
+			hsn = "";
+		}
 		return hsn;
 	}
 	public void setHsn(String hsn) {

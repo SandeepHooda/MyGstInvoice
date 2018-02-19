@@ -326,6 +326,10 @@ function addToCart(){
 	
 	let selectedProduct = JSON.parse(JSON.stringify(selectedProductFromList));
 	selectedProduct.item = selectedProduct.inventoryDesc +" : "+selectedProduct.modelNo; 
+	if (selectedProduct.item.indexOf("undefined") >=0){
+		alert("Your product list is not loaded properly from server. Please refresh your page once.");
+		return;
+	}
 	selectedProduct.quantity = document.getElementById("quantity").value ;
 	selectedProduct.rate = document.getElementById("price").value;
 	
