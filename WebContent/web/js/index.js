@@ -246,7 +246,7 @@ function pupulateInventoryItems(inventoryData){
 	for(let i = 0; i < inventoryData.length;i++) {
 		let option = document.createElement('option');
 	     //option.value =countOfItems+". "+ inventoryData[i].productDesc +" : " +inventoryData[i].inventoryDesc +" : "+inventoryData[i].modelNo;//JSON.stringify(inventoryItemsDB[i]);
-		option.value= option.text = inventoryData[i].index +"."+ inventoryItemsDB[i].productDesc +" : " +inventoryItemsDB[i].inventoryDesc +" : "+inventoryItemsDB[i].modelNo;
+		option.value= option.text = inventoryData[i].index +"."+inventoryItemsDB[i].inventoryDesc +" : "+inventoryItemsDB[i].modelNo;
 		inventoryItems.add(option);
 	   
 	}
@@ -271,7 +271,7 @@ function filterInventoryItems(filterText){
 	option.text = option.value = pleaseSelect;
 	inventoryItems.add(option);
 	for(let i = 0; i < inventoryItemsDB.length;i++) {
-		let productFullName = inventoryItemsDB[i].index +"."+ inventoryItemsDB[i].productDesc +" : " +inventoryItemsDB[i].inventoryDesc +" : "+inventoryItemsDB[i].modelNo;
+		let productFullName = inventoryItemsDB[i].index +"." +inventoryItemsDB[i].inventoryDesc +" : "+inventoryItemsDB[i].modelNo;
 		if (productFullName.toLowerCase().indexOf(filterText.toLowerCase()) >=0){
 			let option = document.createElement('option');
 		     //option.value =countOfItems+". "+ inventoryData[i].productDesc +" : " +inventoryData[i].inventoryDesc +" : "+inventoryData[i].modelNo;//JSON.stringify(inventoryItemsDB[i]);
@@ -308,6 +308,9 @@ function itemSelected(){
 			document.getElementById("price").value = selectedProductFromList.salesPriceOnlineWithoutTax;
 		}else {
 			document.getElementById("price").value = selectedProductFromList.salesPriceRegularWithoutTax;
+		}
+		if (document.getElementById("price").value == 0){
+			document.getElementById("price").value = "";
 		}
 		
 	}
