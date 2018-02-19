@@ -78,6 +78,9 @@ public class RecentInvoices extends HttpServlet {
 					List<InvoiceItem> items = invoice.getMyCart();
 					items.addAll(invoice.getMyCartManual());
 					for (InvoiceItem item: items){
+						if ( (item.getCgst()+item.getSgst()+item.getIgst()) <= 0){
+							continue;
+						}
 						String billingAddress = invoice.getBillingAddress();
 						if (null != billingAddress){
 							billingAddress = billingAddress.replaceAll(",", " ");

@@ -4,7 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.logging.Logger;
 import java.text.DecimalFormat;
 
 import com.itextpdf.text.Document;
@@ -16,6 +16,8 @@ import com.itextpdf.text.pdf.CMYKColor;
 import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfWriter;
 
+
+import email.MailService;
 import vo.InvoiceDetails;
 import vo.InvoiceItem;
 import vo.Registration;
@@ -34,6 +36,7 @@ public class InvoiceToPDF {
      private int taxWidth = 45;
      private int cessWidth = 35;
      private  DecimalFormat df = new DecimalFormat("0.00");
+     private static final Logger log = Logger.getLogger(InvoiceToPDF.class.getName());
 	public ByteArrayOutputStream getPdfBytes(Registration registration, InvoiceDetails invoiceDetails) throws DocumentException, IOException{
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		 Document doc = new Document();
@@ -86,10 +89,12 @@ public class InvoiceToPDF {
 		  catch (DocumentException dex)
 		  {
 		   dex.printStackTrace();
+		   sendEmail(dex);
 		  }
 		  catch (Exception ex)
 		  {
 		   ex.printStackTrace();
+		   sendEmail(ex);
 		  }
 		  finally
 		  {
@@ -190,9 +195,11 @@ public class InvoiceToPDF {
 
 		  catch (DocumentException dex){
 		   dex.printStackTrace();
+		   sendEmail(dex);
 		  }
 		  catch (Exception ex){
 		   ex.printStackTrace();
+		   sendEmail(ex);
 		  }
 
 		 }
@@ -205,19 +212,25 @@ public class InvoiceToPDF {
 			 double totalCess = 0;
 			 double totalInvoice = 0;
 			 for (InvoiceItem item: invoiceDetails.getMyCart()){
-				 totalTaxable += item.getTaxableValue();
-				 totalIgst += item.getIgstApplied();
-				 totalSgst += item.getSgstApplied();
-				 totalCgst += item.getCgstApplied();
-				 totalCess += item.getCessApplied();
+				 if (item.getRowTotal() > 0){
+					 totalTaxable += item.getTaxableValue();
+					 totalIgst += item.getIgstApplied();
+					 totalSgst += item.getSgstApplied();
+					 totalCgst += item.getCgstApplied();
+					 totalCess += item.getCessApplied();
+				 }
+				 
 			 }
 			 for (InvoiceItem item: invoiceDetails.getMyCartManual()){
-				 totalTaxable += item.getTaxableValue();
-				 totalIgst += item.getIgstApplied();
-				 totalSgst += item.getSgstApplied();
-				 totalCgst += item.getCgstApplied();
-				 totalCess += item.getCessApplied();
+				 if (item.getRowTotal() > 0){
+					 totalTaxable += item.getTaxableValue();
+					 totalIgst += item.getIgstApplied();
+					 totalSgst += item.getSgstApplied();
+					 totalCgst += item.getCgstApplied();
+					 totalCess += item.getCessApplied();
+				 }
 			 }
+			 
 			 totalInvoice = totalTaxable +totalIgst+totalSgst+totalCgst+totalCess;
 			 
 			 //Draw Total line 
@@ -289,6 +302,7 @@ public class InvoiceToPDF {
 
 		  catch (Exception ex){
 		   ex.printStackTrace();
+		   sendEmail(ex);
 		  }
 
 		 }
@@ -296,6 +310,9 @@ public class InvoiceToPDF {
 		 private int generateDetail(Document doc, PdfContentByte cb, int index, int y, InvoiceItem aItem)  {
 		 
 		  int noOfLines = 0;
+		  if (aItem.getRowTotal() ==0){
+			  return 1;
+		  }
 		  try {
 		  int penPosX = 22;
 		  String[] itemDescParts = (String.valueOf(index) +". "+ aItem.getItem()).split(" ");
@@ -348,6 +365,7 @@ public class InvoiceToPDF {
 
 		  catch (Exception ex){
 		   ex.printStackTrace();
+		   sendEmail(ex);
 		  }
 		  if (noOfLines == 1){
 			  noOfLines++;
@@ -417,11 +435,22 @@ public class InvoiceToPDF {
 
 		  } catch (DocumentException e) {
 		   e.printStackTrace();
+		   sendEmail(e);
 		  } catch (IOException e) {
 		   e.printStackTrace();
+		   sendEmail(e);
 		  }
 
 
+		 }
+		 
+		 private void sendEmail(Exception e){
+			 try{
+				 log.warning("Some exception occured while generating PDF of invoice."+e.getMessage());
+				 new MailService().sendMultipartMail("sonu.hooda@gmail.com", null,"Sandeep",null, "Error generated in invoice system","Some exception occured while generating PDF of invoice.<br/>"+ e.getMessage());
+			 }catch(Exception ex){
+				 ex.printStackTrace();
+			 }
 		 }
 
 		}
