@@ -23,6 +23,7 @@ import db.MangoDB;
 import misc.Utils;
 import vo.InvoiceDetails;
 import vo.InvoiceDetailsSort;
+import vo.InvoiceItem;
 import vo.Registration;
 
 /**
@@ -51,41 +52,61 @@ public class SubmitInvoice extends HttpServlet {
 		reader.setLenient(true);*/
 		InvoiceDetails invoiceDetails= json.fromJson(invoiceDetailsStr,  InvoiceDetails.class);
 		
-		Registration registrationDetails = (Registration)request.getSession().getAttribute("registrationDetails");
-		if (null == registrationDetails){
-			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-		}else {
-			long latestInvoiceNo = getLatestInvoive(registrationDetails, invoiceDetails.getInvoiceTime());
-			if (latestInvoiceNo == 0){
-				latestInvoiceNo = registrationDetails.getInvoiceStart();
-			}else {
-				latestInvoiceNo++;
+		//Verify invoice details before inserting into DB
+		boolean invoiceOk = true;
+		List<InvoiceItem> allItems = new ArrayList<InvoiceItem>();
+		allItems.addAll(invoiceDetails.getMyCart());
+		allItems.addAll(invoiceDetails.getMyCartManual());
+		for (InvoiceItem item: allItems){
+			double totalTax = item.getCessApplied()+item.getCgstApplied()+item.getSgstApplied()+item.getIgstApplied();
+			if ("".equals(item.getHsn()) || item.getRowTotal() <=0 || item.getItem() == null || item.getItem().indexOf("undefined") >=0  || totalTax == 0){
+				response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
+				invoiceOk = false;
+				return;
 			}
-			invoiceDetails.setInvoiceNo(latestInvoiceNo);
-			invoiceDetails.set_id(""+latestInvoiceNo);
 			
-			Calendar cal = Utils.getCalender();
-			Utils.setTimeZone();
-			cal.setTimeInMillis(invoiceDetails.getInvoiceTime());
-			int year = cal.get(Calendar.YEAR);
-			int month = 1+cal.get(Calendar.MONTH);
-			/* This is a test code
-			List<InvoiceDetails> list = new ArrayList<InvoiceDetails>();
-			for (int i=0;i<1100;i++){
-				
-				InvoiceDetails invoiceDetailsNew = new InvoiceDetails();
-				latestInvoiceNo++;
-				invoiceDetailsNew.set_id(""+latestInvoiceNo);
-				invoiceDetailsNew.setInvoiceNo(latestInvoiceNo);
-				list.add(invoiceDetailsNew);
-				
-			}
-			MangoDB.createNewCollectionWithData(""+month, registrationDetails.getMdbInvoiceStore()+"-"+year, json.toJson(list, new TypeToken<List<InvoiceDetails>>() {}.getType()), MangoDB.mlabKeySonu);
-			This is a test code
-			*/
-			MangoDB.createNewCollectionWithData(registrationDetails.getMdbInvoiceStore()+"-"+year,""+month,  json.toJson(invoiceDetails, InvoiceDetails.class), MangoDB.mlabKeySonu);
-			response.getWriter().append(""+latestInvoiceNo);
 		}
+		
+		if (invoiceOk){
+			
+			Registration registrationDetails = (Registration)request.getSession().getAttribute("registrationDetails");
+			if (null == registrationDetails){
+				response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			}else {
+				long latestInvoiceNo = getLatestInvoive(registrationDetails, invoiceDetails.getInvoiceTime());
+				if (latestInvoiceNo == 0){
+					latestInvoiceNo = registrationDetails.getInvoiceStart();
+				}else {
+					latestInvoiceNo++;
+				}
+				invoiceDetails.setInvoiceNo(latestInvoiceNo);
+				invoiceDetails.set_id(""+latestInvoiceNo);
+				
+				Calendar cal = Utils.getCalender();
+				Utils.setTimeZone();
+				cal.setTimeInMillis(invoiceDetails.getInvoiceTime());
+				int year = cal.get(Calendar.YEAR);
+				int month = 1+cal.get(Calendar.MONTH);
+				/* This is a test code
+				List<InvoiceDetails> list = new ArrayList<InvoiceDetails>();
+				for (int i=0;i<1100;i++){
+					
+					InvoiceDetails invoiceDetailsNew = new InvoiceDetails();
+					latestInvoiceNo++;
+					invoiceDetailsNew.set_id(""+latestInvoiceNo);
+					invoiceDetailsNew.setInvoiceNo(latestInvoiceNo);
+					list.add(invoiceDetailsNew);
+					
+				}
+				MangoDB.createNewCollectionWithData(""+month, registrationDetails.getMdbInvoiceStore()+"-"+year, json.toJson(list, new TypeToken<List<InvoiceDetails>>() {}.getType()), MangoDB.mlabKeySonu);
+				This is a test code
+				*/
+				MangoDB.createNewCollectionWithData(registrationDetails.getMdbInvoiceStore()+"-"+year,""+month,  json.toJson(invoiceDetails, InvoiceDetails.class), MangoDB.mlabKeySonu);
+				response.getWriter().append(""+latestInvoiceNo);
+			}
+			
+		}
+		
 		
 	}
 	

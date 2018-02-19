@@ -25,7 +25,7 @@ public class InvoiceItem {
 		if (null == hsn){
 			hsn = "";
 		}
-		return hsn;
+		return hsn.trim();
 	}
 	public void setHsn(String hsn) {
 		this.hsn = hsn;
