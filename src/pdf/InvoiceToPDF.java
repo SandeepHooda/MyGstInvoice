@@ -185,8 +185,16 @@ public class InvoiceToPDF {
 		   cb.stroke();
 		   //add the images
 		   ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-		   String path = classLoader.getResource("images/"+image).getPath();
-		   Image companyLogo = Image.getInstance(path);
+		   Image companyLogo = null;
+		   try{
+			   String path = classLoader.getResource("images/"+image).getPath();
+			   companyLogo = Image.getInstance(path);
+			   
+		   }catch(Exception e){
+			   companyLogo =Image.getInstance("images/"+image);
+		   }
+		   
+		  
 		   companyLogo.setAbsolutePosition(20,675);
 		   companyLogo.scalePercent(25);
 		   doc.add(companyLogo);
